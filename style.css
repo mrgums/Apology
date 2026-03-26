@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Background */
+.bg-image {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('photo.jpg') no-repeat center center/cover;
+    filter: blur(6px) brightness(0.6);
+    z-index: -3;
+}
+
+.bg-image::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 182, 193, 0.3);
+}
+/* Slideshow container */
+.slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slides (FIXED) */
+.slide {
+    position: absolute;
+    width: 70vw;              /* responsive width */
+    height: 60vh;             /* consistent height */
+    object-fit: cover;        /* IMPORTANT: no stretching */
+    object-position: center;  /* keep faces centered */
+    border-radius: 15px;
+    opacity: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Left animation */
+.slide.left {
+    left: -80%;
+    animation: slideLeft 12s infinite;
+}
+
+/* Right animation */
+.slide.right {
+    right: -80%;
+    animation: slideRight 12s infinite;
+}
+
+/* Delay each pic */
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 4s; }
+.slide:nth-child(3) { animation-delay: 8s; }
+
+/* Smooth cinematic left */
+@keyframes slideLeft {
+    0% { left: -80%; opacity: 0; }
+    10% { left: 15%; opacity: 1; }
+    40% { left: 15%; opacity: 1; }
+    60% { left: 50%; opacity: 0; }
+    100% { left: 50%; opacity: 0; }
+}
+
+/* Smooth cinematic right */
+@keyframes slideRight {
+    0% { right: -80%; opacity: 0; }
+    10% { right: 15%; opacity: 1; }
+    40% { right: 15%; opacity: 1; }
+    60% { right: 50%; opacity: 0; }
+    100% { right: 50%; opacity: 0; }
+}
+/* Hearts */
+.hearts::before {
+    content: "❤️ 💖 💕 💗 💓 💞";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 28px;
+    text-align: center;
+    animation: float 12s linear infinite;
+    opacity: 0.25;
+}
+
+@keyframes float {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
+
+/* Container */
+.container {
+    position: relative;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Title */
+.title {
+    color: white;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Envelope */
+.envelope {
+    position: relative;
+    width: 330px;
+    height: 230px;
+    background: #ff9aa2;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff6f91;
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.8s ease;
+}
+
+.letter {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: rgba(255,255,255,0.95);
+    top: 5%;
+    left: 5%;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.8s ease;
+    border-radius: 10px;
+}
+
+/* Open */
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+    transform: translateY(0);
+}
+
+/* Button */
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #e63950;
+}
